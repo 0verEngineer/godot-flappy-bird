@@ -1,0 +1,65 @@
+[gd_scene load_steps=5 format=3 uid="uid://mdcq5vw4e3bt"]
+
+[ext_resource type="FontFile" uid="uid://cu4lf4od2owng" path="res://Assets/font/FlappyBird.ttf" id="1_3xca2"]
+[ext_resource type="Script" path="res://Scripts/ui.gd" id="1_fky0t"]
+[ext_resource type="Texture2D" uid="uid://x218sp1de1n0" path="res://Assets/gameover.png" id="1_t4bpb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0e033"]
+bg_color = Color(0.709258, 0.567642, 0.469523, 1)
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_fky0t")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 32
+
+[node name="PointsLabel" type="Label" parent="MarginContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("1_3xca2")
+theme_override_font_sizes/font_size = 40
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOverBox" type="VBoxContainer" parent="MarginContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/GameOverBox"]
+layout_mode = 2
+texture = ExtResource("1_t4bpb")
+
+[node name="Panel" type="Panel" parent="MarginContainer/GameOverBox"]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0e033")
+
+[node name="Button" type="Button" parent="MarginContainer/GameOverBox/Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_3xca2")
+theme_override_font_sizes/font_size = 30
+text = "RESTART"
+
+[connection signal="pressed" from="MarginContainer/GameOverBox/Panel/Button" to="." method="_on_button_pressed"]
